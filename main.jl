@@ -211,7 +211,7 @@ function Base.getproperty(app::A, prop::Symbol) where {A <: UIApplication}
     end
 end
 
-function Base.setproperty!(app::Application, prop::Symbol, val)
+function Base.setproperty!(app::A, prop::Symbol, val) where {A <: UIApplication}
     if prop in fieldnames(Application)
         setfield!(app, prop, val)
     elseif prop in properties(app)
@@ -262,7 +262,7 @@ end
 
 
 
-function custom_fonts2(::Application)
+function custom_fonts(::Application)
     fonts = CImGui.GetIO().Fonts
     glyph_ranges = CImGui.GetGlyphRangesKorean(fonts)
     CImGui.AddFontFromFileTTF(fonts, "IropkeBatangM.ttf", 20, C_NULL, glyph_ranges)
